@@ -9,13 +9,40 @@ from ultralytics import YOLO
 
 
 st.set_page_config(page_title='Face Analys', layout='wide')
+# Ссылка на ваши веса (ЕСЛИ СКАЧИВАНИЕ НЕ НУЖНО - оставьте пустой "" или удалите логику)
+WEIGHTS_URL = "https://your-cloud-storage.com"
+WEIGHTS_PATH = '/home/vitaliy/runs/detect/train-28/weights/best.pt'
 
 @st.cache_resource
 def load_models():
-    detect_model = YOLO('/home/vitaliy/runs/detect/train-28/weights/best.pt')
-    return detect_model
+    # 1. Создаем папку, если её нет
+    os.makedirs(os.path.dirname(WEIGHTS_PATH), exist_ok=True)
+    
+    # 2. Скачиваем файл только если его нет локально и указана реальная ссылка
+    if not os.path.exists(WEIGHTS_PATH) and "your-cloud-storage" not in WEIGHTS_URL:
+        with st.spinner("Downloading model weights from cloud storage... Please wait..."):
+            try:
+                tmp_path = WEIGHTS_PATH + ".tmp"
+                urllib.request.urlretrieve(WEIGHTS_URL, tmp_path)
+                os.rename(tmp_path, WEIGHTS_PATH)
+                st.success("Weights downloaded successfully!")
+            except Exception as e:
+                st.error(f"Failed to download weights from cloud: {e}")
+                return None
+
+    # 3. Инициализация модели (если файл на месте)
+    if os.path.exists(WEIGHTS_PATH):
+        return YOLO(WEIGHTS_PATH)
+    else:
+        st.error(f"Weights file not found at {WEIGHTS_PATH}. Please check the path.")
+        return None
 
 detect_model = load_models()
+# Проверяем, загрузилась ли модель, чтобы не упасть дальше по коду
+if detect_model is None:
+    st.stop()
+
+
 
 page = st.sidebar.selectbox('Please choose pages', ['Detect and Blur Face', 'About model and process of fit'])
 
