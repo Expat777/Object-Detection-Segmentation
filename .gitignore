@@ -1,0 +1,32 @@
+# === Python & Virtual Environments ===
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+build/
+dist/
+
+# === Machine Learning Datasets & Logs ===
+# Датасеты и папки обучения остаются в исключениях (они слишком огромные)
+data/
+datasets/
+runs/
+logs/
+.tensorboard/
+mlflow/
+wandb/
+
+# === Streamlit Configuration & Secrets ===
+.streamlit/config.toml
+.streamlit/secrets.toml
+
+# === OS & IDE Secrets ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.env
+*.env
