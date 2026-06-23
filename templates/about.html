@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>📊 О модели и качестве обучения</h1>
+
+<div class="card">
+    <div class="metrics">
+        <div class="metric"><div class="val">25</div><div class="lbl">Эпох обучения</div></div>
+        <div class="metric"><div class="val">13 386</div><div class="lbl">Изображений (Train)</div></div>
+        <div class="metric"><div class="val">0.883</div><div class="lbl">mAP50</div></div>
+        <div class="metric"><div class="val">YOLOv11x</div><div class="lbl">Архитектура</div></div>
+    </div>
+</div>
+
+<h2>📈 Графики обучения</h2>
+{% if graphs %}
+<div class="grid">
+    {% for title, src in graphs.items() %}
+    <div class="card">
+        <h3>{{ title }}</h3>
+        <img src="{{ src }}" alt="{{ title }}" style="width:100%; border-radius:8px;">
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="error">
+    Графики не найдены. Папка <code>runs/detect/train-28/</code> исключена из git
+    (см. .gitignore), поэтому на сервере её нет. Чтобы графики отображались,
+    скопируйте PNG-файлы в эту папку рядом с приложением.
+</div>
+{% endif %}
+{% endblock %}

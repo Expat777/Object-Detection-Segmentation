@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Детекция и анонимизация лиц{% endblock %}</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+            margin: 0; background: #0f1117; color: #e6e6e6;
+        }
+        header {
+            padding: 16px 24px; background: #161922;
+            display: flex; gap: 24px; align-items: center;
+            border-bottom: 1px solid #262a36;
+        }
+        header a { color: #9ecbff; text-decoration: none; font-weight: 600; }
+        header a:hover { text-decoration: underline; }
+        main { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+        h1 { font-size: 26px; }
+        .card {
+            background: #161922; border: 1px solid #262a36;
+            border-radius: 12px; padding: 24px; margin-bottom: 20px;
+        }
+        label { display: block; margin: 14px 0 6px; font-weight: 600; }
+        input[type=text], input[type=file] {
+            width: 100%; padding: 10px; border-radius: 8px;
+            border: 1px solid #3a3f4d; background: #0f1117; color: #e6e6e6;
+        }
+        input[type=range] { width: 100%; }
+        button {
+            margin-top: 18px; padding: 12px 24px; border: none;
+            border-radius: 8px; background: #2563eb; color: #fff;
+            font-size: 16px; font-weight: 600; cursor: pointer;
+        }
+        button:hover { background: #1d4ed8; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .grid img { width: 100%; border-radius: 8px; border: 1px solid #262a36; }
+        .caption { text-align: center; color: #9aa0ad; margin-top: 6px; }
+        .error { color: #ff8a8a; background: #2a1717; padding: 12px;
+                 border-radius: 8px; border: 1px solid #5a2a2a; }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+        th, td { padding: 8px; border-bottom: 1px solid #262a36; text-align: left; }
+        .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .metric { background: #0f1117; border: 1px solid #262a36;
+                  border-radius: 10px; padding: 16px; text-align: center; }
+        .metric .val { font-size: 22px; font-weight: 700; color: #9ecbff; }
+        .metric .lbl { font-size: 13px; color: #9aa0ad; margin-top: 4px; }
+        @media (max-width: 640px) {
+            .grid, .metrics { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">🏠 Детекция лиц</a>
+        <a href="/about">📊 О модели</a>
+        <a href="/docs">⚙️ API (Swagger)</a>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

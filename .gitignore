@@ -15,6 +15,9 @@ data/
 datasets/
 runs/
 logs/
+
+# Веса модели скачиваются при первом запуске — в git не храним
+models/**/*.pt
 .tensorboard/
 mlflow/
 wandb/

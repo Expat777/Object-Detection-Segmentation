@@ -1,0 +1,13 @@
+# --- Веб-слой (FastAPI) ---
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9   # нужен для загрузки файлов через форму
+jinja2>=3.1               # HTML-шаблоны
+
+# --- ML-слой ---
+ultralytics>=8.2          # YOLO
+torch>=2.2                # на сервере ставится CPU-версия (см. Dockerfile)
+opencv-python-headless>=4.9   # headless: без GUI-зависимостей, важно для сервера
+numpy>=1.26
+pillow>=10.0
+requests>=2.31

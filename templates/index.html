@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>👤 Детекция и анонимизация лиц</h1>
+<p>Загрузите изображение с компьютера или вставьте URL-ссылку. Модель найдёт лица
+   и размоет их по Гауссу.</p>
+
+{% if error %}
+<div class="error">❌ {{ error }}</div>
+{% endif %}
+
+<div class="card">
+    <form action="/detect" method="post" enctype="multipart/form-data">
+        <label for="file">Изображение (jpeg / jpg / png):</label>
+        <input type="file" id="file" name="file" accept="image/png, image/jpeg">
+
+        <label for="url">…или URL-ссылка на картинку:</label>
+        <input type="text" id="url" name="url" placeholder="https://example.com/photo.jpg">
+
+        <label for="conf">Порог уверенности (Confidence):
+            <span id="confVal">0.15</span></label>
+        <input type="range" id="conf" name="conf" min="0.10" max="1.00"
+               step="0.05" value="0.15"
+               oninput="document.getElementById('confVal').textContent = this.value">
+
+        <button type="submit">🚀 Обработать</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>📁 Результат: {{ source_name }}</h1>
+<p>Найдено лиц: <strong>{{ count }}</strong> (порог уверенности {{ conf }})</p>
+
+<div class="card">
+    <div class="grid">
+        <div>
+            <img src="{{ original }}" alt="Оригинал">
+            <div class="caption">Оригинал</div>
+        </div>
+        <div>
+            <img src="{{ result }}" alt="Результат">
+            <div class="caption">Размытые лица</div>
+        </div>
+    </div>
+</div>
+
+{% if faces %}
+<div class="card">
+    <h3>Координаты найденных лиц</h3>
+    <table>
+        <tr><th>#</th><th>x1, y1, x2, y2</th><th>Уверенность</th></tr>
+        {% for f in faces %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ f.box }}</td>
+            <td>{{ f.conf }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+
+<a href="/">← Обработать ещё одно изображение</a>
+{% endblock %}
